@@ -1,5 +1,5 @@
 # Smart Home
-### Based upon [**Denys Dovhan Smart Home**](https://denysdovhan.com/smart-home)
+#### Based upon [**Denys Dovhan Smart Home**](https://denysdovhan.com/smart-home)
 
 This is my personal smart-home configuration, awakening my home with services and tools. I hope this will help you inspire on the way to built your own smart home.
 
