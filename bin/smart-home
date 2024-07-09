@@ -104,12 +104,28 @@ function smart-home:command:help() {
 
 function smart-home:command:init() {
   # Update packages
-  sudo apt-get update
-  sudo apt-get upgrade
+  sudo apt update
+  sudo apt upgrade
+
+  # Remove existin docker
+  if smart-home:exists docker; then
+    echo "Removing docker..."
+    sudo apt remove -y \ 
+        docker \ 
+        docker-engine \
+        docker.io \
+        containerd \
+        runc
+  fi
 
   # Install docker
   if ! smart-home:exists docker; then
     echo "Installing docker..."
+    sudo apt install -y \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
     curl -fsSL https://get.docker.com | sh
     sudo usermod -G docker -a "$USER"
   fi
@@ -120,7 +136,10 @@ function smart-home:command:init() {
   fi
 
   echo "Installing additional packages..."
-  sudo apt-get install -y git python3-pip nodejs
+  sudo apt install -y \ 
+        git \
+        python3-pip \
+        nodejs
 
   echo "Installing python dependencies..."
   pip3 install -r "$SMART_HOME_DIR/requirements.txt"
