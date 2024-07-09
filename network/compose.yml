@@ -14,7 +14,7 @@ services:
       - '5300:80/tcp' # WEB UI
     environment:
       TZ: 'Europe/Rome'
-      WEBPASSWORD: ${PIHOLE_WEBPASSWORD}
+      WEBPASSWORD: ${PIHOLE_WEBPASSWORD} # Remember to set it in .env
     volumes:
       - ${DOCKER}/pihole/etc-pihole:/etc/pihole
       - ${DOCKER}/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
