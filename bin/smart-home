@@ -107,7 +107,7 @@ function smart-home:command:init() {
   sudo apt update
   sudo apt upgrade
 
-  # Remove existin docker
+  # Remove existing docker
   if smart-home:exists docker; then
     echo "Removing docker..."
     sudo apt remove -y \ 
