@@ -87,7 +87,7 @@ function smart-home:docker:update() {
 
 function smart-home:command:help() {
   echo "
-  🏡 Denys Dovhan Smart Home
+  🏡 Smart Home
 
   smart-home [stack] start              start all services
   smart-home [stack] stop               stop all services
