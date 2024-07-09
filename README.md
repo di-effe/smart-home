@@ -28,5 +28,11 @@ Stacks are logical app groupings and are phisically defined by a directory conta
 
 
 ## License
+
 [MIT][license-url] 
+
+<!-- References -->
+
+[license-url]: https://github.com/di-effe/smart-home/blob/master/LICENSE
+
 
