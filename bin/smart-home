@@ -121,11 +121,6 @@ function smart-home:command:init() {
   # Install docker
   if ! smart-home:exists docker; then
     echo "Installing docker..."
-    sudo apt install -y \
-        ca-certificates \
-        curl \
-        gnupg \
-        lsb-release
     curl -fsSL https://get.docker.com | sh
     sudo usermod -G docker -a "$USER"
   fi
