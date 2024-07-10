@@ -1,0 +1,19 @@
+name: backup
+services:
+  # Duplicati
+  # Backup client that securely stores encrypted, incremental, compressed remote backups of local files on cloud storage services and remote file servers.
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=${TIMEZONE}
+      - CLI_ARGS= #optional
+    volumes:
+      - ${STACK_DATA}/duplicati:/config
+      - ${DUPLICATI_BACKUPS_PATH}:/backups
+      - /:/source
+    ports:
+      - 8200:8200
+    restart: unless-stopped

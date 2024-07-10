@@ -18,6 +18,8 @@ Stacks are groups of apps organized by a common trait and are physically defined
 - **Network**
   - **Pi-hole** - DNS and ad blocker
 
+- **Backup**
+  - **Duplicati** - Duplicati is a backup client that securely stores encrypted, incremental, compressed remote backups of local files on cloud storage services and remote file servers. 
 
 ## Getting Started
 
@@ -48,6 +50,11 @@ smart-home essentials up
 ### Deploy network tools
 ```bash
 smart-home network up
+  ```
+
+### Deploy backup tools
+```bash
+smart-home backup up
   ```
 
 
