@@ -27,7 +27,7 @@ Create an `/opt/stacks` folder or update the `STACK_DATA` variable in the `.env`
 
 ### Environment Variables
 
-Rename `blank.env` to `.env` and update all variables according to your needs and setup. Note that the script will not run if `.env` is not detected.
+Rename `blank_env` to `.env` and update all variables according to your needs and setup. Note that the script will not run if `.env` is not detected.
 
 
 ### Init
