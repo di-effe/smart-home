@@ -1,7 +1,7 @@
 name: network
 services:
   # Pi-hole
-  # TODO: DNS add blocker
+  # DNS and ad blocker
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
