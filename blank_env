@@ -1,0 +1,17 @@
+# Set docker directory for container mount points
+STACK_DATA=/opt/stacks
+
+# Set passwords
+PIHOLE_PASSWORD=
+
+# SMTP
+EMAIL_SERVER=
+EMAIL_SERVER_PORT=
+EMAIL_SERVER_AUTH_USER=
+EMAIL_SERVER_AUTH_PASSWORD=
+EMAIL_SERVER_ADDRESS_FROM=
+EMAIL_SERVER_ADDRESS_TO=
+
+
+# Misc
+TIMEZONE='Europe/Rome'
