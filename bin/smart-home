@@ -39,7 +39,7 @@ function smart-home:utils:jump() {
 }
 
 function smart-home:utils:back() {
-  popd > /dev/null || exit 1 
+  popd > /dev/null || exit 1
 }
 
 function smart-home:utils:list_stacks() {
@@ -67,7 +67,7 @@ function smart-home:docker:down() {
 }
 
 function smart-home:docker:restart() {
-  docker compose restart $* 
+  docker compose restart $*
 }
 
 function smart-home:docker:update() {
@@ -98,7 +98,6 @@ function smart-home:command:help() {
   smart-home init                       install dependencies
   smart-home prune                      delete obsolete containers
   smart-home password                   generate a password
-  smart-home docs                       server docs website locally
 "
 }
 
@@ -116,8 +115,8 @@ function smart-home:command:init() {
   # Remove existing docker
   if smart-home:exists docker; then
     echo "Removing docker..."
-    sudo apt remove -y \ 
-        docker \ 
+    sudo apt remove -y \
+        docker \
         docker-engine \
         docker.io \
         containerd \
@@ -137,18 +136,11 @@ function smart-home:command:init() {
   fi
 
   echo "Installing additional packages..."
-  sudo apt install -y \ 
+  sudo apt install -y \
         git \
         python3-pip \
         nodejs
 
-  echo "Installing python dependencies..."
-  pip3 install -r "$SMART_HOME_DIR/requirements.txt"
-  
-  echo "Addint pre-commit hooks..."
-  pre-commit install
-
-  echo "Done!"
   echo "Please, reboot!"
 }
 
