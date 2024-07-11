@@ -11,21 +11,6 @@ services:
     privileged: true
     network_mode: host
 
-  # Node Red
-  nodered:
-    container_name: nodered
-    image: nodered/node-red
-    ports:
-      - 1880:1880
-    volumes:
-      - ${STACK_DATA}/hass/nodered:/data
-    depends_on:
-      - homeassistant
-      - mosquitto
-    environment:
-      - TZ=${TIMEZONE}
-    restart: unless-stopped
-
   # Mosquitto Broker
   mosquitto:
     image: eclipse-mosquitto
@@ -42,12 +27,3 @@ services:
       - TZ=${TIMEZONE}
     user: "1883:1883"
 
-  # Home Assistant configurator
-  hass-configurator:
-    image: "causticlab/hass-configurator-docker:latest"
-    restart: always
-    ports:
-      - "3218:3218/tcp"
-    volumes:
-      - "${STACK_DATA}/hass/configurator-config:/config"
-      - "${STACK_DATA}/hass/hass-config:/hass-config"
