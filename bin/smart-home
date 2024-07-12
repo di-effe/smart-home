@@ -110,7 +110,7 @@ function smart-home:command:init() {
   sudo systemctl stop systemd-resolved
   sudo systemctl disable systemd-resolved
   sudo rm /etc/resolv.conf
-  echo -e "nameserver 8.8.8.8\nnameserver 8.8.4.4" | sudo tee /etc/resolv.conf
+  echo -e "nameserver 127.0.0.1\nnameserver 8.8.8.8\nnameserver 8.8.4.4" | sudo tee /etc/resolv.conf
 
   # Remove existing docker
   if smart-home:exists docker; then
