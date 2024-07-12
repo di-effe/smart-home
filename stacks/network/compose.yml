@@ -13,7 +13,7 @@ services:
       - '53:53/tcp' # DNS
       - '53:53/udp' # DNS
       #- '67:67/udp' # DHCP Only required if you are using Pi-hole as your DHCP server
-      - '5300:80/tcp' # WEB UI      
+      #- '5300:80/tcp' # WEB UI      
     #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
     #cap_add:
       #- NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
@@ -23,3 +23,9 @@ services:
     labels:
       # Watchtower add to auto update
       - com.centurylinklabs.watchtower.enable=true
+    networks:
+     - caddy_net
+
+networks:
+  caddy_net:
+    external: true

@@ -1,6 +1,22 @@
 name: essentials
 services:
 
+  # Caddy reverse proxy
+  caddy_reverse_proxy:
+    container_name: caddy_proxy
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ${STACK_DATA}/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ${STACK_DATA}/caddy/caddy_data:/data
+      - ${STACK_DATA}/caddy/caddy_config:/config
+    networks:
+      - caddy_net
+
+
   # Homarr
   # Fancy dashboard for displaying home services
   homarr:
@@ -12,11 +28,13 @@ services:
       - ${STACK_DATA}/homarr/configs:/app/data/configs
       - ${STACK_DATA}/homarr/icons:/app/public/icons
       - ${STACK_DATA}/homarr/data:/data
-    ports:
-      - 7575:7575
+    #ports:
+    #  - 7575:7575
     labels:
       # Watchtower add to auto update
       - com.centurylinklabs.watchtower.enable=true
+    networks:
+     - caddy_net
 
 
   # Portainer CE
@@ -27,14 +45,15 @@ services:
     restart: unless-stopped
     ports:
       - 8000:8000 # Agent
-      - 9000:9000 # Web UI
+      #- 9000:9000 # Web UI
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${STACK_DATA}/portainer/data:/data
     labels:
       # Watchtower add to auto update
       - com.centurylinklabs.watchtower.enable=true
-
+    networks:
+     - caddy_net
 
   # Gotify
   # Gotify is a self-hosted server application for sending and receiving messages
@@ -50,15 +69,16 @@ services:
       - GOTIFY_DATABASE_DIALECT=sqlite3
       - GOTIFY_DATABASE_CONNECTION=db/gotify.db
       - TZ=${TIMEZONE}
-    ports:
-      - 2080:2080  # Web UI
+    #ports:
+      #- 2080:2080  # Web UI
     volumes:
       - ${STACK_DATA}/gotify/db:/app/db
       - ${STACK_DATA}/gotify/data:/app/data
     labels:
       # Watchtower add to auto update
       - com.centurylinklabs.watchtower.enable=true
-
+    networks:
+     - caddy_net
 
   # Watchtower
   # A container-based solution for automating Docker container base image updates.
@@ -85,5 +105,10 @@ services:
     labels:
       # Watchtower add to auto update
       - com.centurylinklabs.watchtower.enable=true
+    networks:
+     - caddy_net
 
 
+networks:
+  caddy_net:
+    external: true

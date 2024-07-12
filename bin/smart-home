@@ -153,6 +153,36 @@ function smart-home:command:init() {
   sudo chown -R mosquitto: /opt/stacks/hass/mosquitto
 
 
+  echo "Configuring Caddy reverse proxe pre-requisites"
+  docker network create caddy_net
+  sudo mkdir ${STACK_DATA}/caddy
+  # Create the Caddyfile with the given environment variables
+  sudo tee ${STACK_DATA}/caddy/Caddyfile > /dev/null <<-EOF
+    {
+        email ${EMAIL}
+    }
+
+    ${CADDY_HOMARR} {
+        reverse_proxy homarr:7575
+    }
+
+    ${CADDY_PORTAINER} {
+        reverse_proxy portainer:9000
+    }
+
+    ${CADDY_GOTIFY} {
+        reverse_proxy gotify:2080
+    }
+
+    ${CADDY_DUPLICATI} {
+        reverse_proxy duplicati:8200
+    }
+
+    ${CADDY_PIHOLE} {
+        reverse_proxy pihole:80
+    }
+EOF
+
 
   echo "Please, reboot!"
 }

@@ -11,8 +11,8 @@ services:
       - PGID=0
       - TZ=${TIMEZONE}
       - CLI_ARGS= #optional
-    ports:
-      - 8200:8200
+    #ports:
+      #- 8200:8200
     volumes:
       - ${STACK_DATA}/duplicati:/config
       - ${DUPLICATI_BACKUPS_PATH}:/backups
@@ -20,3 +20,9 @@ services:
     labels:
       # Watchtower add to auto update
       - com.centurylinklabs.watchtower.enable=true
+    networks:
+     - caddy_net
+
+networks:
+  caddy_net:
+    external: true

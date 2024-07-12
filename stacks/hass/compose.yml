@@ -32,3 +32,4 @@ services:
     labels:
       # Watchtower add to auto update
       - com.centurylinklabs.watchtower.enable=true
+

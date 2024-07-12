@@ -1,18 +1,28 @@
 # GLOBAL
 SERVERNAME=server
+DOMAIN=local
+EMAIL=admin@server.local
 TIMEZONE='Europe/Rome'
-PROXY_NETWORK=proxy_net
 STACK_DATA=/opt/stacks
 
 
-# PASSWORDS
+# PASSWORD
 PIHOLE_PASSWORD=
 GOTIFY_PASSWORD=
 
 
-# DUPLICATI
+# CADDY
+CADDY_HOMARR=dashboard.local
+CADDY_PORTAINER=portainer.local
+CADDY_GOTIFY=gotify.local
+CADDY_DUPLICATI=duplicati.local
+CADDY_PIHOLE=pihole.local
+
+# DUPLICATI 
 DUPLICATI_BACKUPS_PATH=
 
 
 # WATCHTOWER
 WATCHTOWER_GOTIFY_TOKEN=
+
+
