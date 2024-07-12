@@ -1,38 +1,5 @@
 name: essentials
 services:
-  # Portainer CE
-  # Managing containers via nice web UI
-  portainer:
-    container_name: portainer
-    image: portainer/portainer-ce
-    restart: unless-stopped
-    ports:
-      - 8000:8000 # Agent
-      - 9000:9000 # Web UI
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${STACK_DATA}/portainer/data:/data
-
-  # Watchtower
-  # A solution for automating Docker container base image updates
-  watchtower:
-    container_name: watchtower
-    image: containrrr/watchtower
-    restart: unless-stopped
-    environment:
-      WATCHTOWER_CLEANUP: 'true'
-      WATCHTOWER_WARN_ON_HEAD_FAILURE: 'never'
-      WATCHTOWER_NO_STARTUP_MESSAGE: 'true'
-      WATCHTOWER_SCHEDULE: '0 0 5 * * 6'
-      # WATCHTOWER_NOTIFICATIONS: email
-      # WATCHTOWER_NOTIFICATION_EMAIL_FROM: ${EMAIL_SERVER_ADDRESS_FROM} # Remember to set it in .env
-      # WATCHTOWER_NOTIFICATION_EMAIL_TO: ${EMAIL_SERVER_ADDRESS_TO} # Remember to set it in .env
-      # WATCHTOWER_NOTIFICATION_EMAIL_SERVER: ${EMAIL_SERVER} # Remember to set it in .env
-      # WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT: ${EMAIL_SERVER_PORT} # Remember to set it in .env
-      # WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER: ${EMAIL_SERVER_AUTH_USER} # Remember to set it in .env
-      # WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD: ${EMAIL_SERVER_AUTH_PASSWORD} # Remember to set it in .env
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
 
   # Homarr
   # Fancy dashboard for displaying home services
@@ -47,4 +14,73 @@ services:
       - ${STACK_DATA}/homarr/data:/data
     ports:
       - 7575:7575
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
 
+
+  # Portainer CE
+  # Managing containers via nice web UI
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce
+    restart: unless-stopped
+    ports:
+      - 8000:8000 # Agent
+      - 9000:9000 # Web UI
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${STACK_DATA}/portainer/data:/data
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
+
+  # Gotify
+  # Gotify is a self-hosted server application for sending and receiving messages
+  gotify:
+    container_name: gotify
+    hostname: gotify.localhost
+    image: gotify/server
+    restart: unless-stopped
+    environment:
+      - GOTIFY_SERVER_PORT=2080
+      - GOTIFY_DEFAULTUSER_NAME=admin
+      - GOTIFY_DEFAULTUSER_PASS=${GOTIFY_PASSWORD}
+      - GOTIFY_DATABASE_DIALECT=sqlite3
+      - GOTIFY_DATABASE_CONNECTION=db/gotify.db
+      - TZ=${TIMEZONE}
+    ports:
+      - 2080:2080  # Web UI
+    volumes:
+      - ${STACK_DATA}/gotify/db:/app/db
+      - ${STACK_DATA}/gotify/data:/app/data
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
+
+  # Watchtower
+  # A container-based solution for automating Docker container base image updates.
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
+    restart: unless-stopped
+    environment:
+      - WATCHTOWER_NOTIFICATIONS=gotify
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=http://gotify.localhost:2080
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${WATCHTOWER_GOTIFY_TOKEN}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TLS_SKIP_VERIFY=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_ROLLING_RESTARTING=true
+      - WATCHTOWER_INTERVAL=200
+      - WATCHTOWER_INCLUDE_STOPPED=true
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true

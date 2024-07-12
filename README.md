@@ -13,7 +13,8 @@ Stacks are groups of apps organized by a common trait and are physically defined
 - **Essentials**
   - **Portainer CE** - Manage containers via a user-friendly web UI
   - **Homarr** - Fancy dashboard for displaying home services
-  - **Watchtower** - Automate Docker container base image updates
+  - **Gotify** - A simple server for sending and receiving messages
+  - **Watchtower** - A container-based solution for automating Docker container base image updates.
 
 - **Network**
   - **Pi-Hole** - DNS and ad blocker
@@ -24,6 +25,7 @@ Stacks are groups of apps organized by a common trait and are physically defined
 - **HASS**
   - **Home Assistant** - Home Assistant is free and open-source software used for home automation 
   - **Mosquitto Broker** - MQTT acts like a messaging service that makes it easier for Home Assistant to send and receive messages from sensors and other devices
+
 
 ## Getting Started
 
@@ -53,6 +55,21 @@ Rename `blank_env` to `.env` and update all variables according to your needs an
 ```bash
 smart-home essentials up
   ```
+
+To receive Watchtower notififications in Gotify:
+
+1. Open Gotify web interface `http://<IPADDRESS>:2080`
+2. click on APPS
+3. Click on CREATE APPLICATION
+4. Enter Watchtower as name, and click CREATE
+5. Take note of the Token
+6. Edit the `.env` file
+7. Fill up `WATCHTOWER_GOTIFY_TOKEN` with the newly created token
+
+
+```bash
+smart-home essentials down && smart-home essentials up
+```
 
 ### Deploy network tools
 ```bash
@@ -110,6 +127,7 @@ smart-home hass up
 2. Click on Settings, "Devices & services" and  the + ADD INTEGRATION button 
 3. Search for `mqtt` and select MQTT (it should be the first one found) 
 4. Enter `localhost` as broker and click SUBMIT
+
 
 
 ## Important notes

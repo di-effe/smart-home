@@ -4,18 +4,24 @@ services:
   homeassistant:
     container_name: homeassistant
     image: "ghcr.io/home-assistant/home-assistant:stable"
-    volumes:
-      - ${STACK_DATA}/hass/hass-config:/config
-      - /etc/localtime:/etc/localtime:ro
     restart: unless-stopped
     privileged: true
     network_mode: host
+    volumes:
+      - ${STACK_DATA}/hass/hass-config:/config
+      - /etc/localtime:/etc/localtime:ro
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
 
   # Mosquitto Broker
   mosquitto:
     image: eclipse-mosquitto
     container_name: mosquitto
     restart: unless-stopped
+    environment:
+      - TZ=${TIMEZONE}
+    user: "1883:1883"
     ports:
       - 1883:1883
       - 9001:9001
@@ -23,7 +29,6 @@ services:
       - "${STACK_DATA}/hass/mosquitto/config:/mosquitto/config"
       - "${STACK_DATA}/hass/mosquitto/data:/mosquitto/data"
       - "${STACK_DATA}/hass/mosquitto/log:/mosquitto/log"
-    environment:
-      - TZ=${TIMEZONE}
-    user: "1883:1883"
-
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
