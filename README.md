@@ -41,8 +41,6 @@ Directory set as `STACK_DATA` variable (by default /opt/stacks) in the `.env` fi
 
 
 ### Init
-- Connect via ssh on your server 
-- Clone `smart-home` repository to home folder or restore from backup
 - Add smart-home script to `PATH` and set `SMART_HOME_DIR`:
   ```bash
   echo 'export SMART_HOME_DIR="$HOME/smart-home"' >> ~/.bashrc
