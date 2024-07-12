@@ -139,7 +139,7 @@ smart-home hass up
 
 #### Complete configuration
 
-1. Access `http://<IPADDRESS>:8123` and create your account for Home Assistant
+1. Access `http://<IPADDRESS>:8123` or `http://hass.local:8123`  and create your account for Home Assistant
 2. Click on Settings, "Devices & services" and  the + ADD INTEGRATION button 
 3. Search for `mqtt` and select MQTT (it should be the first one found) 
 4. Enter `localhost` as broker and click SUBMIT
