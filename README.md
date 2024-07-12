@@ -29,16 +29,15 @@ Stacks are groups of apps organized by a common trait and are physically defined
 
 ## Getting Started
 
-### Stacks Persistent Data
-
-Create an `/opt/stacks` folder or update the `STACK_DATA` variable in the `.env` file (see below).
-```bash
-sudo mkdir -p /opt/stacks
-  ```
 
 ### Environment Variables
 
 Rename `blank_env` to `.env` and update all variables according to your needs and setup. Note that the script will not run if `.env` is not detected.
+
+
+### Stacks Persistent Data
+
+Directory set as `STACK_DATA` variable (by default /opt/stacks) in the `.env` file will be created during the init (see below) 
 
 
 ### Init
@@ -50,6 +49,12 @@ Rename `blank_env` to `.env` and update all variables according to your needs an
   echo 'export PATH="$PATH:$HOME/smart-home/bin"' >> ~/.bashrc
   source ~/.bashrc
   ```
+- Initialize the home server
+
+```bash
+smart-home init
+  ```
+
 
 ### Deploy essentials tools
 ```bash

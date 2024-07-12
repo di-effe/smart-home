@@ -141,6 +141,17 @@ function smart-home:command:init() {
         python3-pip \
         nodejs
 
+
+  echo "Creating stack persistent data folder"
+  sudo mkdir ${STACK_DATA}
+
+  echo "Configuring HASS pre-requisites"
+  sudo mkdir -p ${STACK_DATA}/hass/mosquitto/config
+  sudo cp ../configs/hass/mosquitto.conf ${STACK_DATA}/hass/mosquitto/config/
+  sudo groupadd -g 1883 mosquitto
+  sudo useradd -u 1883 -g 1883 mosquitto
+  sudo chown -R mosquitto: /opt/stacks/hass/mosquitto
+
   echo "Please, reboot!"
 }
 
