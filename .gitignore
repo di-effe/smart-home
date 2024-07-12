@@ -1,6 +1,5 @@
 # Generic ignores
 *.log*
-*.conf
 *.db
 *.db.corrupt.*
 *.db-shm
