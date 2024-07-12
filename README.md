@@ -100,39 +100,6 @@ smart-home backup up
 
 ### Deploy Home Assistant tools
 
-Ref: https://pimylifeup.com/home-assistant-docker-compose/
-
-
-```bash
-sudo mkdir -p /opt/stacks/hass
-```
-
-#### Setting up Mosquitto 
-
-```bash
-sudo groupadd -g 1883 mosquitto
-sudo useradd -u 1883 -g 1883 mosquitto
-sudo mkdir -p /opt/stacks/hass/mosquitto/config
-sudo nano /opt/stacks/hass/mosquitto/config/mosquitto.conf
-```
-
-Enter the following lines and save
-
-```
-persistence true
-persistence_location /mosquitto/data/
-log_dest file /mosquitto/log/mosquitto.log
-listener 1883
-listener 9001
-allow_anonymous true
-```
-
-```bash
-sudo chown -R mosquitto: /opt/stacks/hass/mosquitto
-```
-
-#### Deploy the HASS stack
-
 ```bash
 smart-home hass up
   ```
