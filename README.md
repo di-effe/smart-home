@@ -35,12 +35,12 @@ Stacks are groups of apps organized by a common trait and are physically defined
 
 Setup your local DNS records for
 
-- Homarr (default value in .env is 'dashboard.local')
-- Portainer (default value in .env is 'portainer.local')
-- Gotify (default value in .env is 'gotify.local')
-- Duplucati (default value in .env is 'duplicati.local')
-- Pi-Hole (default value in .env is 'pihole.local')
-- HomeAssistant (default value in .env is 'hass.local')
+- Homarr (default value in .env is `dashboard.local`)
+- Portainer (default value in .env is `portainer.local`)
+- Gotify (default value in .env is `gotify.local`)
+- Duplucati (default value in .env is `duplicati.local`)
+- Pi-Hole (default value in .env is `pihole.local`)
+- HomeAssistant (default value in .env is `hass.local`)
 
 
 ### Environment Variables
