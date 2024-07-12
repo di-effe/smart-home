@@ -17,6 +17,7 @@ CADDY_PORTAINER=portainer.local
 CADDY_GOTIFY=gotify.local
 CADDY_DUPLICATI=duplicati.local
 CADDY_PIHOLE=pihole.local
+CADDY_HASS=hass.local
 
 # DUPLICATI 
 DUPLICATI_BACKUPS_PATH=

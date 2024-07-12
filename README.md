@@ -11,6 +11,7 @@ Stacks are groups of apps organized by a common trait and are physically defined
 ### Available Stacks
 
 - **Essentials**
+  - **Caddy Reverse proxy** - Caddy sports a flexible and powerful HTTP reverse proxy, on-line configuration API, and a robust, production-ready static file server, and serves all sites over HTTPS by default with automagic TLS certificates.
   - **Portainer CE** - Manage containers via a user-friendly web UI
   - **Homarr** - Fancy dashboard for displaying home services
   - **Gotify** - A simple server for sending and receiving messages
@@ -28,6 +29,18 @@ Stacks are groups of apps organized by a common trait and are physically defined
 
 
 ## Getting Started
+
+
+### DNS Records
+
+Setup your local DNS records for
+
+- Homarr (default value in .env is 'dashboard.local')
+- Portainer (default value in .env is 'portainer.local')
+- Gotify (default value in .env is 'gotify.local')
+- Duplucati (default value in .env is 'duplicati.local')
+- Pi-Hole (default value in .env is 'pihole.local')
+- HomeAssistant (default value in .env is 'hass.local')
 
 
 ### Environment Variables
@@ -61,7 +74,7 @@ smart-home essentials up
 
 To receive Watchtower notififications in Gotify:
 
-1. Open Gotify web interface `http://<IPADDRESS>:2080`
+1. Open Gotify web interface `https://gotofy.local` (or whatever you set in .env as `CADDY_GOTIFY`)
 2. click on APPS
 3. Click on CREATE APPLICATION
 4. Enter Watchtower as name, and click CREATE
