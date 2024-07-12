@@ -75,11 +75,10 @@ services:
       - WATCHTOWER_ROLLING_RESTARTING=true
       - WATCHTOWER_INTERVAL=200
       - WATCHTOWER_INCLUDE_STOPPED=true
+      - TZ=${TIMEZONE}
     security_opt:
       - no-new-privileges:true
     volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       # Watchtower add to auto update
