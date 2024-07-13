@@ -69,6 +69,27 @@ services:
     networks:
      - caddy_net
 
+  # Kavita
+  # Kavit is a fast, feature rich, cross platform reading server
+  kavita:
+    container_name: kavita
+    image: lscr.io/linuxserver/kavita:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    #ports:
+      #- 5000:5000
+    volumes:
+      - ${STACK_DATA}/kavita:/config
+      - ${MEDIA_BOOKS}:/data
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
+    networks:
+     - caddy_net
+
 
 networks:
   caddy_net:

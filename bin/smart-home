@@ -194,6 +194,10 @@ function smart-home:command:init() {
         reverse_proxy readarr:8787
     }
 
+    ${CADDY_KAVITA} {
+        reverse_proxy kavita:5000
+    }
+
 
 EOF
 

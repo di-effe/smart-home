@@ -31,6 +31,7 @@ Stacks are groups of apps organized by a common trait and are physically defined
   - **SABnzbd** - SABnzbd is an Open Source Binary Newsreader written in Python
   - **Prowlarr** - Prowlarr is an indexer manager/proxy
   - **Readarr** - Book Manager and Automation
+  - **Kavita** - Kavita is a full-fledged, fast, cross-platform, & open-source manga, comic, and book server
 
 ## Getting Started
 

@@ -21,7 +21,7 @@ CADDY_HASS=hass.local
 CADDY_SABNZBD=sabnzbd.local
 CADDY_PROWLARR=prowlarr.local
 CADDY_READARR=readarr.local
-
+CADDY_KAVITA=reader.local
 
 # DUPLICATI 
 DUPLICATI_BACKUPS_PATH=
