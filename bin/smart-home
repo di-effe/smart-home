@@ -153,7 +153,7 @@ function smart-home:command:init() {
   sudo chown -R mosquitto: /opt/stacks/hass/mosquitto
 
 
-  echo "Configuring Caddy reverse proxe pre-requisites"
+  echo "Configuring Caddy reverse proxy pre-requisites"
   docker network create caddy_net
   sudo mkdir ${STACK_DATA}/caddy
   # Create the Caddyfile with the given environment variables
@@ -181,8 +181,29 @@ function smart-home:command:init() {
     ${CADDY_PIHOLE} {
         reverse_proxy pihole:80
     }
+
+    ${CADDY_SABNZBD} {
+        reverse_proxy sabnzbd:8080
+    }
+
+    ${CADDY_PROWLARR} {
+        reverse_proxy prowlarr:9696
+    }
+
+    ${CADDY_READARR} {
+        reverse_proxy readarr:8787
+    }
+
+
 EOF
 
+  echo "Configuring Media stuff pre-requisites"
+  sudo mkdir ${MEDIA_DOWNLOAD_COMPLETE}
+  sudo chown ${USER} ${MEDIA_DOWNLOAD_COMPLETE}
+  sudo mkdir ${MEDIA_DOWNLOAD_INCOMPLETE}
+  sudo chown ${USER} ${MEDIA_DOWNLOAD_INCOMPLETE}
+  sudo mkdir -p ${MEDIA_BOOKS}
+  sudo chown ${USER} ${MEDIA_BOOKS}
 
   echo "Please, reboot!"
 }
@@ -194,7 +215,7 @@ function smart-home:command:up() {
     smart-home:utils:jump "$stack"
     smart-home:docker:up "$@"
     smart-home:utils:back
-  done
+  done 
 }
 
 function smart-home:command:stop() {

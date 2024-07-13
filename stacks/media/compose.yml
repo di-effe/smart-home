@@ -1,0 +1,75 @@
+name: media
+services:
+
+  # Sabnzbd
+  # SABnzbd is an Open Source Binary Newsreader written in Python.
+  sabnzbd:
+    container_name: sabnzbd
+    image: lscr.io/linuxserver/sabnzbd:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    ports:
+      - 8080:8080
+    volumes:
+      - ${STACK_DATA}/sabnzbd:/config
+      - ${MEDIA_DOWNLOAD_COMPLETE}:/config/Downloads/complete
+      - ${MEDIA_DOWNLOAD_INCOMPLETE}:/config/Downloads/incomplete
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
+    networks:
+     - caddy_net
+
+  # Prowlarr
+  # Prowlarr is an indexer manager/proxy.
+  prowlarr:
+    container_name: prowlarr
+    image: lscr.io/linuxserver/prowlarr:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    #ports:
+      #- 9696:9696
+    volumes:
+      - ${STACK_DATA}/prowlarr:/config
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
+    depends_on:
+      - sabnzbd
+    networks:
+     - caddy_net
+
+  # Readarr
+  # Book Manager and Automation
+  readarr:
+    container_name: readarr
+    image: lscr.io/linuxserver/readarr:develop
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    #ports:
+      #- 8787:8787
+    volumes:
+      - ${STACK_DATA}/readarr:/config
+      - ${MEDIA_BOOKS}:/books
+      - ${MEDIA_DOWNLOAD_COMPLETE}:/config/Downloads/complete
+    labels:
+      # Watchtower add to auto update
+      - com.centurylinklabs.watchtower.enable=true
+    depends_on:
+      - sabnzbd
+    networks:
+     - caddy_net
+
+
+networks:
+  caddy_net:
+    external: true
