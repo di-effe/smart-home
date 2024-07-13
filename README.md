@@ -11,22 +11,26 @@ Stacks are groups of apps organized by a common trait and are physically defined
 ### Available Stacks
 
 - **Essentials**
-  - **Caddy Reverse proxy** - Caddy sports a flexible and powerful HTTP reverse proxy, on-line configuration API, and a robust, production-ready static file server, and serves all sites over HTTPS by default with automagic TLS certificates.
+  - **Caddy Reverse proxy** - Caddy sports a flexible and powerful HTTP reverse proxy, on-line configuration API, and a robust, production-ready static file server, and serves all sites over HTTPS by default with automagic TLS certificates
   - **Portainer CE** - Manage containers via a user-friendly web UI
   - **Homarr** - Fancy dashboard for displaying home services
   - **Gotify** - A simple server for sending and receiving messages
-  - **Watchtower** - A container-based solution for automating Docker container base image updates.
+  - **Watchtower** - A container-based solution for automating Docker container base image updates
 
 - **Network**
   - **Pi-Hole** - DNS and ad blocker
 
 - **Backup**
-  - **Duplicati** - Duplicati is a backup client that securely stores encrypted, incremental, compressed remote backups of local files on cloud storage services and remote file servers. 
+  - **Duplicati** - Duplicati is a backup client that securely stores encrypted, incremental, compressed remote backups of local files on cloud storage services and remote file servers
 
 - **HASS**
   - **Home Assistant** - Home Assistant is free and open-source software used for home automation 
   - **Mosquitto Broker** - MQTT acts like a messaging service that makes it easier for Home Assistant to send and receive messages from sensors and other devices
 
+- **Media**
+  - **SABnzbd** - SABnzbd is an Open Source Binary Newsreader written in Python
+  - **Prowlarr** - Prowlarr is an indexer manager/proxy
+  - **Readarr** - Book Manager and Automation
 
 ## Getting Started
 
@@ -41,7 +45,9 @@ Setup your local DNS records for
 - Duplucati (default value in .env is `duplicati.local`)
 - Pi-Hole (default value in .env is `pihole.local`)
 - HomeAssistant (default value in .env is `hass.local`)
-
+- SABnzbd (default value in .env is `sabnzbd.local`)
+- Prowlarr (default value in .env is `prowlarr.local`)
+- Readarr (default value in .env is `readarr.local`)
 
 ### Environment Variables
 
@@ -111,6 +117,11 @@ smart-home hass up
 3. Search for `mqtt` and select MQTT (it should be the first one found) 
 4. Enter `localhost` as broker and click SUBMIT
 
+
+### Deploy media tools
+```bash
+smart-home media up
+  ```
 
 
 ## Important notes
