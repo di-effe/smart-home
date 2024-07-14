@@ -194,8 +194,9 @@ function smart-home:command:init() {
         reverse_proxy readarr:8787
     }
 
-    ${CADDY_KAVITA} {
-        reverse_proxy kavita:5000
+    ${CADDY_READER} {
+        encode gzip zstd
+        reverse_proxy audiobookshelf:80
     }
 
 
@@ -208,6 +209,9 @@ EOF
   sudo chown ${USER} ${MEDIA_DOWNLOAD_INCOMPLETE}
   sudo mkdir -p ${MEDIA_BOOKS}
   sudo chown ${USER} ${MEDIA_BOOKS}
+  sudo mkdir -p ${MEDIA_COMICS}
+  sudo chown ${USER} ${MEDIA_COMICS}
+
 
   echo "Please, reboot!"
 }
